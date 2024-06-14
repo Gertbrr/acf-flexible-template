@@ -173,7 +173,11 @@ if( !class_exists('MC_Acf_Flexible_Template') ) {
         * @since 1.0.1
         */
         public function mc_ft_select_display( $field_key ) {
-
+			
+			if(acf_flexible_templates_get_selected_subsite()) {
+				switch_to_blog(acf_flexible_templates_get_selected_subsite());
+			}
+			
             $templates_tax = get_terms( array(
                 'taxonomy' => 'acf_template_tax',
                 'hide_empty' => true,
@@ -309,6 +313,10 @@ if( !class_exists('MC_Acf_Flexible_Template') ) {
                 </div>
             </div>
             <?php
+			
+			if(acf_flexible_templates_get_selected_subsite()) {
+				restore_current_blog();
+			}
         }
 
         /*
@@ -449,7 +457,11 @@ if( !class_exists('MC_Acf_Flexible_Template') ) {
         * @since 1.0.1
         */
         public function mc_acf_import_template() {
-
+			
+			if(acf_flexible_templates_get_selected_subsite()) {
+				switch_to_blog(acf_flexible_templates_get_selected_subsite());
+			}
+			
             global $post;
 
             // Default json return if ok
@@ -578,6 +590,10 @@ if( !class_exists('MC_Acf_Flexible_Template') ) {
                     exit;
                 }
             }
+			
+			if(acf_flexible_templates_get_selected_subsite()) {
+				restore_current_blog();
+			}
         }
 
         /*

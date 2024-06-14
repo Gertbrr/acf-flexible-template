@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: MC ACF Flexible Template
+ * Plugin Name: ACF Flexible Template
  * Plugin URI: https://github.com/MarieComet/MC-ACF-Flexible-Template
  * Description: This WordPress plugin makes it possible to save the ACF flexible content fields as templates and to use them again
- * Author: Marie Comet
+ * Author: Embite
  * Author URI: https://www.mariecomet.fr
  * Version: 1.1.1
  * License: GPLv2
@@ -72,7 +72,12 @@ function mc_acf_ft_missing_notice(){
 add_action( 'plugins_loaded', 'mc_acf_ft_load' );
 function mc_acf_ft_load() {
     if ( class_exists('acf') ) {
-        include_once('includes/mc-acf-ft-register-cpt.php');
+		include_once('includes/set-subsite-as-source.php');
+		
+		if(get_current_blog_id() == acf_flexible_templates_get_selected_subsite()){
+        	include_once('includes/mc-acf-ft-register-cpt.php');
+		}
+		
         include_once('includes/class-mc-acf-flexible-template.php');
     }
 }
