@@ -524,8 +524,8 @@ if( !class_exists('MC_Acf_Flexible_Template') ) {
                     $parent_object = get_field_object( $layout_parent_key, true, true );
 
                     // acf flexible main class
-                    if ( class_exists('acf_field_flexible_content') ) {
-                        $acf_flex_class = new acf_field_flexible_content();
+                    if ( class_exists('acfe_field_flexible_content') ) {
+                        $acfe_instance = acf_get_instance('acfe_field_flexible_content');
 
                         /*
                         * Some loops, here's the point :
@@ -563,7 +563,7 @@ if( !class_exists('MC_Acf_Flexible_Template') ) {
 
                                 ob_start();
                                 // render LAYOUT
-                                $acf_flex_class->render_layout( $parent_object, $fake_layouts[ $value['acf_fc_layout'] ], 
+                                $acfe_instance->render_layout( $parent_object, $fake_layouts[ $value['acf_fc_layout'] ], 
                                     $initial_count, $value );
                                 $item[] = ob_get_clean();
                                 // increment counter
